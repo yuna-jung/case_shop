@@ -43,8 +43,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   // 아이템 삭제 함수 (setState를 통해 화면 즉시 갱신)
   void _removeItem(int index) {
     setState(() {
-      widget.cart.removeAt(index);      // 실제 상품 데이터 삭제
-      quantities.removeAt(index);      // 해당 상품의 수량 데이터 삭제
+      widget.cart.removeAt(index);// 실제 상품 데이터 삭제
+      quantities.removeAt(index);// 해당 상품의 수량 데이터 삭제
     });
   }
 
@@ -62,8 +62,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   @override
   Widget build(BuildContext context) {
-    // ⚠️ [수정] build 내부에 있던 quantities 재초기화 로직을 완전히 제거했습니다.
-    // 해당 로직이 있으면 삭제 버튼을 눌러도 화면이 갱신되지 않는 문제가 발생합니다.
 
     if (widget.cart.isEmpty) {
       return Scaffold(
