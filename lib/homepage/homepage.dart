@@ -113,7 +113,6 @@ class _HomePageState extends State<Homepage> {
   }
 }
 
-
 // import 'package:flutter/material.dart';
 // import 'package:shopping_mall_project/data/models/product_entity.dart';
 // import 'package:shopping_mall_project/homepage/app_title.dart';
