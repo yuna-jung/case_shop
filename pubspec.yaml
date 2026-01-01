@@ -79,6 +79,9 @@ flutter:
     - family: Permanent_Marker
       fonts:
         - asset: assets/fonts/PermanentMarker-Regular.ttf
+    - family: Schoolbell
+      fonts:
+        - asset: assets/fonts/Schoolbell-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
