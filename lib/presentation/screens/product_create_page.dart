@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import '../models/product.dart';
+import '../../models/product.dart';
 
 class ProductCreatePage extends StatefulWidget {
   const ProductCreatePage({super.key});
