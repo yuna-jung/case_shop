@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../models/product.dart';
 
@@ -70,37 +71,33 @@ class _ProductShoppingCartState extends State<ProductShoppingCart> {
   }
 
   void _showPurchaseDialog() {
-    showDialog(
+    showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: const Text('구매 확인'),
-          content: Text(
-            '총 ${_formatPrice(totalPrice)}을(를) 결제하시겠습니까?',
-            style: const TextStyle(fontSize: 16),
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+          content: Padding(
+            padding: EdgeInsets.only(top: 8),
+            child: Text(
+              '총 ${_formatPrice(totalPrice)}을(를) 결제하시겠습니까?',
+              style: TextStyle(fontSize: 16),
+            ),
           ),
           actions: [
-            TextButton(
+            CupertinoDialogAction(
+              isDestructiveAction: true,
               onPressed: () => Navigator.of(context).pop(),
               child: const Text(
                 '취소',
-                style: TextStyle(color: Colors.grey, fontSize: 16),
+                // style: TextStyle(color: Colors.grey, fontSize: 16),
               ),
             ),
-            ElevatedButton(
+            CupertinoDialogAction(
               onPressed: () {
                 Navigator.of(context).pop();
-                _showPurchaseCompleteDialog();
+                Future.microtask(() => _showPurchaseCompleteDialog());
               },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text('확인', style: TextStyle(fontSize: 16)),
+              child: const Text('확인'),
             ),
           ],
         );
@@ -109,17 +106,21 @@ class _ProductShoppingCartState extends State<ProductShoppingCart> {
   }
 
   void _showPurchaseCompleteDialog() {
-    showDialog(
+    showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: const Text('구매 완료'),
-          content: const Text('구매가 완료되었습니다!', style: TextStyle(fontSize: 16)),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+          content: Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text('구매가 완료되었습니다!', style: TextStyle(fontSize: 16)),
           ),
+          // shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.circular(12),
+          // ),
           actions: [
-            ElevatedButton(
+            CupertinoDialogAction(
+              isDefaultAction: true,
               onPressed: () {
                 // 장바구니 비우기
                 widget.cart.clear();
@@ -130,11 +131,6 @@ class _ProductShoppingCartState extends State<ProductShoppingCart> {
                 // 장바구니 페이지도 닫고 목록 페이지로 돌아가기
                 Navigator.of(context).pop();
               },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
               child: const Text('확인', style: TextStyle(fontSize: 16)),
             ),
           ],

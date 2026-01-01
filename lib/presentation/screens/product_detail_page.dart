@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-import '../../models/product.dart';
+import '/models/product.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final Product product;
@@ -117,41 +118,39 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: const Text('장바구니'),
-          content: Text(
-            '${widget.product.name}을(를) $quantity개 장바구니에 담으시겠습니까?',
-            style: const TextStyle(fontSize: 16),
+          content: Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              '${widget.product.name}을(를) $quantity개 장바구니에 담으시겠습니까?',
+              style: const TextStyle(fontSize: 16),
+            ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+
           actions: [
-            TextButton(
+            CupertinoDialogAction(
+              isDestructiveAction: true,
               onPressed: () {
                 Navigator.of(context).pop();
               },
               child: const Text(
                 '취소',
-                style: TextStyle(color: Colors.grey, fontSize: 16),
+
               ),
             ),
-            ElevatedButton(
+            CupertinoDialogAction(
+              isDefaultAction: true,
               onPressed: () {
-                // 장바구니에 추가
                 if (widget.onAddToCart != null) {
                   widget.onAddToCart!(widget.product, quantity);
                 }
+
                 Navigator.of(context).pop();
-                _showAddToCartCompleteDialog();
+                Future.microtask(() => _showAddToCartCompleteDialog());
               },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text('확인', style: TextStyle(fontSize: 16)),
-            ),
+              child: const Text('확인'),
+            )
           ],
         );
       },
@@ -159,28 +158,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   void _showAddToCartCompleteDialog() {
-    showDialog(
+    showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: const Text('장바구니 담기 완료'),
-          content: const Text(
-            '장바구니에 상품이 담겼습니다!',
-            style: TextStyle(fontSize: 16),
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+          content: const Padding(
+            padding: EdgeInsets.only(top: 8),
+            child: Text('장바구니에 상품이 담겼습니다!', style: TextStyle(fontSize: 16)),
           ),
           actions: [
-            ElevatedButton(
+            CupertinoDialogAction(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
               child: const Text('확인', style: TextStyle(fontSize: 16)),
             ),
           ],
@@ -192,37 +183,27 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   void _showPurchaseConfirmDialog() {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
+      builder: (context) {
+        return CupertinoAlertDialog(
           title: const Text('구매 확인'),
           content: Text(
             '${widget.product.name}을(를) $quantity개 구매하시겠습니까?',
             style: const TextStyle(fontSize: 16),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // 팝업 닫기
-              },
-              child: const Text(
-                '취소',
-                style: TextStyle(color: Colors.grey, fontSize: 16),
-              ),
-            ),
-            ElevatedButton(
+          CupertinoDialogAction(
+            isDestructiveAction: true,
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('취소'),
+          ),
+            CupertinoDialogAction(
+              isDefaultAction: true,
               onPressed: () {
                 Navigator.of(context).pop(); // 첫 번째 팝업 닫기
-                _showPurchaseCompleteDialog(); // 구매 완료 팝업 표시
+                Future.microtask(() => _showPurchaseCompleteDialog()); // 구매 완료 팝업 표시
               },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text('확인', style: TextStyle(fontSize: 16)),
+              child: const Text('확인'),
             ),
           ],
         );
@@ -234,23 +215,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: const Text('구매 완료'),
-          content: const Text('구매가 완료되었습니다!', style: TextStyle(fontSize: 16)),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+          content: Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text('구매가 완료되었습니다!', style: TextStyle(fontSize: 16)),
           ),
           actions: [
-            ElevatedButton(
+            CupertinoDialogAction(
+              isDefaultAction: true,
               onPressed: () {
                 Navigator.of(context).pop(); // 팝업 닫기
               },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text('확인', style: TextStyle(fontSize: 16)),
+              child: const Text('확인'),
             ),
           ],
         );
@@ -262,36 +239,26 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: const Text('상품 삭제'),
           content: Text(
             '${widget.product.name}을(를) 삭제하시겠습니까?',
             style: const TextStyle(fontSize: 16),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
           actions: [
-            TextButton(
+            CupertinoDialogAction(
+              isDestructiveAction: true,
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
               },
-              child: const Text(
-                '취소',
-                style: TextStyle(color: Colors.grey, fontSize: 16),
-              ),
+              child: const Text('취소'),
             ),
-            ElevatedButton(
+            CupertinoDialogAction(
+              isDefaultAction: true,
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
                 Navigator.of(context).pop(true); // 상세 페이지 닫고 삭제 신호 전달
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
               child: const Text('삭제', style: TextStyle(fontSize: 16)),
             ),
           ],

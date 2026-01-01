@@ -16,34 +16,34 @@ class _ProductListPageState extends State<ProductListPage> {
   // 임시 상품 데이터
   List<Product> products = [
     const Product(
-      name: '아이폰 15 Pro 케이스',
+      name: 'Creeper Twin Baby Epoxy Case',
       price: 35000,
-      imageUrl: 'https://picsum.photos/300/300?random=1',
-      description: '고급스러운 가죽 케이스',
+      imageUrl: 'https://img.29cm.co.kr/item/202501/11efce3938a527d2ad1b2dc32f03e40b.jpg?width=700&format=webp',
+      description: '에폭시 범퍼 케이스',
     ),
     const Product(
-      name: '갤럭시 S24 케이스',
-      price: 25000,
-      imageUrl: 'https://picsum.photos/300/300?random=2',
-      description: '튼튼한 실리콘 케이스',
+      name: 'MINT & WHITE Case',
+      price: 29000,
+      imageUrl: 'https://img.29cm.co.kr/item/202501/11efce5619910b2cad1bcfec99e7dd75.jpg?width=700&format=webp',
+      description: '폴리카보네이트 소재의 케이스',
     ),
     const Product(
-      name: '맥북 프로 파우치',
-      price: 0,
-      imageUrl: 'https://picsum.photos/300/300?random=3',
-      description: '무료 증정 이벤트',
+      name: '(B) Love, Romantic, Success Case',
+      price: 35000,
+      imageUrl: 'https://img.29cm.co.kr/item/202501/11efce3b278d52658521bb0f49478188.jpg?width=700&format=webp',
+      description: '러브 에폭시 범퍼 케이스',
     ),
     const Product(
-      name: '에어팟 케이스',
-      price: 15000,
-      imageUrl: 'https://picsum.photos/300/300?random=4',
-      description: '귀여운 캐릭터 디자인',
+      name: 'Baby dog case',
+      price: 35000,
+      imageUrl: 'https://img.29cm.co.kr/item/202501/11efcd7680e37552ad1b413fee643a03.jpg?width=700&format=webp',
+      description: '강아지 에폭시 케이스',
     ),
     const Product(
-      name: '아이패드 커버',
-      price: 45000,
-      imageUrl: 'https://picsum.photos/300/300?random=5',
-      description: '스탠드 기능 포함',
+      name: 'White horse case',
+      price: 35000,
+      imageUrl: 'https://img.29cm.co.kr/item/202501/11efcd754ee8c586ad1bfd60beba8629.jpg?width=700&format=webp',
+      description: '백마 에폭시 케이스',
     ),
   ];
 
@@ -126,8 +126,12 @@ class _ProductListPageState extends State<ProductListPage> {
           children: [
             const SizedBox(width: 8),
             const Text(
-              'CaseShop',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              'Case Shop',
+              
+              style: TextStyle(
+                fontWeight: FontWeight.w900, 
+                fontSize: 30,
+                fontFamily: 'Schoolbell'),
             ),
           ],
         ),
